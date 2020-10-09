@@ -11,12 +11,19 @@ import com.ibm.managecurrency.dto.ResponseStatus;
 import com.ibm.managecurrency.entity.Currency;
 import com.ibm.managecurrency.mapper.CurrencyMapper;
 import com.ibm.managecurrency.repository.ManageCurrencyRepository;
+import com.ibm.managecurrency.restclient.ConvertCurrencyClient;
 
 @Service
 public class ManageCurrencyService {
 
 	@Autowired
 	ManageCurrencyRepository manageCurrencyRepository;
+	
+	final ConvertCurrencyClient convertCurrencyClient;
+	
+	public ManageCurrencyService(ConvertCurrencyClient convertCurrencyClient) {
+		this.convertCurrencyClient=convertCurrencyClient;
+	}
 
 	//@HystrixCommand(fallbackMethod = "currencyServiceFallback")
 	public Double getCovertionFactor(String countrycode) {
@@ -24,6 +31,16 @@ public class ManageCurrencyService {
 		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
 		Double convertionFactor = currency.getConvertionfactor();
 		return convertionFactor;
+
+	}
+	public CurrencyDTO getCurrency(String countrycode) {
+
+		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
+		CurrencyMapper currencymapper= new CurrencyMapper();
+		CurrencyDTO dto=currencymapper.convertToDto(currency);
+		Double convertedamount= convertCurrencyClient.convertCurrency(countrycode, 100.0);
+		dto.setConvertedamount(convertedamount);
+		return dto;
 
 	}
 

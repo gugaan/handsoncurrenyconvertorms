@@ -1,0 +1,5 @@
+package com.ibm.managecurrency.restclient;
+
+public interface ConvertCurrencyClient {
+
+}

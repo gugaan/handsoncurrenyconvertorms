@@ -42,6 +42,14 @@ public class ManageCurrencyController {
 		//manageCurrencyService.getCovertionFactor(countrycode);
 		return  ResponseEntity.ok().body(manageCurrencyService.getCovertionFactor(countrycode));
 	}
+	
+	@ApiOperation(" This will search convertion factor for given country code")
+	@GetMapping("/bycountrycode/{countrycode}")
+	public ResponseEntity<CurrencyDTO> getCurrency(@PathVariable(value="countrycode") String countrycode) {
+		logger.info("Enters getConversionFactor methods ");
+		//manageCurrencyService.getCovertionFactor(countrycode);
+		return  ResponseEntity.ok().body(manageCurrencyService.getCurrency(countrycode));
+	}
 
 	@ApiOperation(" This will add convertion factor")
 	@PostMapping("/add")

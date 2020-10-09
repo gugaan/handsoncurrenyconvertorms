@@ -8,6 +8,7 @@ public class CurrencyDTO {
 	public Long id;
 	public String countrycode;
 	public Double convertionfactor;
+	public Double convertedamount;
 
 	public Long getId() {
 		return id;
@@ -31,6 +32,14 @@ public class CurrencyDTO {
 
 	public void setConvertionfactor(Double convertionfactor) {
 		this.convertionfactor = convertionfactor;
+	}
+
+	public Double getConvertedamount() {
+		return convertedamount;
+	}
+
+	public void setConvertedamount(Double convertedamount) {
+		this.convertedamount = convertedamount;
 	}
 
 }
