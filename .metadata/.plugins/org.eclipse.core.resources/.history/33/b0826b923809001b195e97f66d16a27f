@@ -1,0 +1,8 @@
+package com.ibm.managecurrency.entity;
+
+public class Currency {
+
+	public Currency() {
+	}
+
+}

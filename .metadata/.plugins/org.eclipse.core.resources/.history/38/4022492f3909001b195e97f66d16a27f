@@ -1,0 +1,27 @@
+package com.ibm.managecurrency.entity;
+
+import javax.persistence.Column;
+
+public class Currency {
+
+	public Currency() {
+	}
+	@Column(name="countrycode")
+    public String countrycode;
+	@Column(name="convertionfactor")
+    public Double convertionfactor;
+	public String getCountrycode() {
+		return countrycode;
+	}
+	public void setCountrycode(String countrycode) {
+		this.countrycode = countrycode;
+	}
+	public Double getConvertionfactor() {
+		return convertionfactor;
+	}
+	public void setConvertionfactor(Double convertionfactor) {
+		this.convertionfactor = convertionfactor;
+	}
+	
+    
+}

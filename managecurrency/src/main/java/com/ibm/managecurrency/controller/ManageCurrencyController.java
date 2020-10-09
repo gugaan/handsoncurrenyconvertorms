@@ -1,0 +1,58 @@
+package com.ibm.managecurrency.controller;
+
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ibm.managecurrency.dto.CurrencyDTO;
+import com.ibm.managecurrency.dto.ResponseStatus;
+import com.ibm.managecurrency.service.ManageCurrencyService;
+
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+public class ManageCurrencyController {
+	
+	@Autowired
+	ManageCurrencyService manageCurrencyService;
+
+	private static final Logger logger = LoggerFactory.getLogger(ManageCurrencyController.class);
+	
+	
+	@ApiOperation(" This will search convertion factor for given country code")
+	@GetMapping("/id/{id}")
+	public ResponseEntity<CurrencyDTO> getConversionFactorByID(@PathVariable(value="id") Long id) {
+		logger.info("Enters getConversionFactor methods ");
+		//manageCurrencyService.getCovertionFactor(countrycode);
+		CurrencyDTO currentDTO=manageCurrencyService.getCovertionFactorByID(id);
+		return  ResponseEntity.ok().body(currentDTO);
+	}
+	@ApiOperation(" This will search convertion factor for given country code")
+	@GetMapping("/countrycode/{countrycode}")
+	public ResponseEntity<Double> getConversionFactor(@PathVariable(value="countrycode") String countrycode) {
+		logger.info("Enters getConversionFactor methods ");
+		//manageCurrencyService.getCovertionFactor(countrycode);
+		return  ResponseEntity.ok().body(manageCurrencyService.getCovertionFactor(countrycode));
+	}
+
+	@ApiOperation(" This will add convertion factor")
+	@PostMapping("/add")
+	public ResponseEntity<ResponseStatus> addConversionFactor(@RequestBody CurrencyDTO currencyDTO) {
+		return ResponseEntity.ok().body(manageCurrencyService.createConversionFactor(currencyDTO));
+		
+	}
+	
+	@ApiOperation(" This will update convertion factor")
+	@PostMapping("/update")
+	public ResponseEntity<ResponseStatus> updateConversionFactor(@RequestBody CurrencyDTO currencyDTO) {
+		return ResponseEntity.ok().body(manageCurrencyService.updateConversionFactor(currencyDTO));
+	}
+}
