@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS convertedcurrency;
+CREATE TABLE convertedcurrency(id NUMBER AUTO_INCREMENT PRIMARY KEY,countryCode VARCHAR(20) NOT NULL,convertionamount NUMBER(100) NOT NULL);
+INSERT INTO convertedcurrency(countryCode,convertionamount) VALUES ('INR',50),('US',72.5),('EURO',45.5);

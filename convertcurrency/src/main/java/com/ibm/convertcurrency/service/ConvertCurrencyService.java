@@ -3,7 +3,9 @@ package com.ibm.convertcurrency.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ibm.convertcurrency.controller.dto.ConvertedCurrencyDTO;
 import com.ibm.convertcurrency.entity.ConvertedCurrency;
+import com.ibm.convertcurrency.mapper.ConvertedCurrencyMapper;
 import com.ibm.convertcurrency.repository.ConvertCurrencyRepository;
 
 @Service
@@ -23,5 +25,12 @@ public class ConvertCurrencyService {
 		}
 		return convertedamount;
 
+	}
+
+	public ConvertedCurrency addConvertedCurrency(ConvertedCurrencyDTO currencyDTO) {
+		ConvertedCurrencyMapper mapper=new ConvertedCurrencyMapper();
+		ConvertedCurrency convertedCurrency=mapper.convertToEntity(currencyDTO);
+		
+		return convertCurrencyRepository.save(convertedCurrency);
 	}
 }

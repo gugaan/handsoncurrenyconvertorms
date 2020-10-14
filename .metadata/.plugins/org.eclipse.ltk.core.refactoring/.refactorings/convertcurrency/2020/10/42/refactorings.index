@@ -3,3 +3,6 @@
 1602509162622	Rename package 'com.ibm.managecurrency.repository'
 1602509192558	Delete element
 1602509213695	Rename type 'ManageCurrencyRepository'
+1602667432714	Rename package 'com.ibm.managecurrency.mapper'
+1602667465156	Rename type 'CurrencyMapper'
+1602667975175	Delete element

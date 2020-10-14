@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS managecurrency;
+CREATE TABLE managecurrency(id NUMBER AUTO_INCREMENT PRIMARY KEY,countryCode VARCHAR(20) NOT NULL,convertionfactor NUMBER(100) NOT NULL);
+INSERT INTO managecurrency(countryCode,convertionfactor) VALUES ('INR',55),('US',80.5),('EURO',70.5);

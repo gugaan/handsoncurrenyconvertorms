@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="currency")
+@Table(name="managecurrency")
 public class Currency {
 
 	public Currency() {

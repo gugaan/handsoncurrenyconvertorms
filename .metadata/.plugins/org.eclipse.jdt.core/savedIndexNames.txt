@@ -4,7 +4,6 @@ INDEX VERSION 1.131+D:\HandsOn\.metadata\.plugins\org.eclipse.jdt.core
 3725861923.index
 3652780084.index
 2396521724.index
-2373961922.index
 1464214773.index
 2560046922.index
 1756671695.index
@@ -16,7 +15,6 @@ INDEX VERSION 1.131+D:\HandsOn\.metadata\.plugins\org.eclipse.jdt.core
 2402753778.index
 2246105518.index
 4099510036.index
-1202461718.index
 1675983427.index
 1078839837.index
 576776720.index
@@ -26,7 +24,6 @@ INDEX VERSION 1.131+D:\HandsOn\.metadata\.plugins\org.eclipse.jdt.core
 2937027742.index
 570589311.index
 456679162.index
-997663254.index
 3223746021.index
 698879618.index
 1896810404.index
