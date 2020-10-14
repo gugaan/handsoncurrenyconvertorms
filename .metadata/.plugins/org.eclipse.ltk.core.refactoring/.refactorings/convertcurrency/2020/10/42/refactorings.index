@@ -1,0 +1,5 @@
+1602508929279	Rename package 'com.ibm.managecurrency.entity'
+1602508972859	Rename type 'Currency'
+1602509162622	Rename package 'com.ibm.managecurrency.repository'
+1602509192558	Delete element
+1602509213695	Rename type 'ManageCurrencyRepository'

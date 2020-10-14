@@ -3,6 +3,7 @@ package com.ibm.managecurrency.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import com.ibm.managecurrency.entity.Currency;
 import com.ibm.managecurrency.mapper.CurrencyMapper;
 import com.ibm.managecurrency.repository.ManageCurrencyRepository;
 import com.ibm.managecurrency.restclient.ConvertCurrencyClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class ManageCurrencyService {
@@ -25,7 +27,7 @@ public class ManageCurrencyService {
 		this.convertCurrencyClient=convertCurrencyClient;
 	}
 
-	//@HystrixCommand(fallbackMethod = "currencyServiceFallback")
+	
 	public Double getCovertionFactor(String countrycode) {
 
 		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
@@ -33,26 +35,26 @@ public class ManageCurrencyService {
 		return convertionFactor;
 
 	}
+	@HystrixCommand(fallbackMethod = "convertCurrencyServiceFallback")
 	public CurrencyDTO getCurrency(String countrycode) {
 
 		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
 		CurrencyMapper currencymapper= new CurrencyMapper();
 		CurrencyDTO dto=currencymapper.convertToDto(currency);
-		Double convertedamount= convertCurrencyClient.convertCurrency(countrycode, 100.0);
+		Double convertedamount= convertCurrencyClient.convertCurrency(countrycode, dto.getConvertionfactor());
 		dto.setConvertedamount(convertedamount);
 		return dto;
 
 	}
-
-	public Double currencyServiceFallback(String countrycode) {
+	public CurrencyDTO convertCurrencyServiceFallback(String countrycode) {
 
 		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
-		Double convertionFactor = null;
+		CurrencyMapper currencymapper= new CurrencyMapper();
+		CurrencyDTO dto=currencymapper.convertToDto(currency);
 		if (currency != null) {
-			convertionFactor = 25.0;
-
+			dto.setConvertedamount(55.65);
 		}
-		return convertionFactor;
+		return dto;
 	}
 	
 	public ResponseStatus createConversionFactor(CurrencyDTO dto) {
@@ -60,7 +62,7 @@ public class ManageCurrencyService {
 		CurrencyMapper currencymapper= new CurrencyMapper();
 		Currency currency=currencymapper.convertToEntity(dto);
 		manageCurrencyRepository.save(currency);
-		responseStatus.setStatus(ResponseEntity.ok().toString());
+		responseStatus.setStatus(HttpStatus.OK.name());
 		responseStatus.setErrorMessage("Updated Successfully");
 		return responseStatus;
 	}
@@ -71,10 +73,10 @@ public class ManageCurrencyService {
 		currency.setCountrycode(dto.getCountrycode());
 		currency.setConvertionfactor(dto.getConvertionfactor());
 		manageCurrencyRepository.save(currency);
-		responseStatus.setStatus(ResponseEntity.ok().toString());
+		responseStatus.setStatus(HttpStatus.OK.name());
 		responseStatus.setErrorMessage("Updated Successfully");
 		}else {
-			responseStatus.setStatus(ResponseEntity.noContent().toString());
+			responseStatus.setStatus(HttpStatus.NO_CONTENT.name());
 			responseStatus.setErrorMessage("There is no country code exists");
 		}
 		return responseStatus;

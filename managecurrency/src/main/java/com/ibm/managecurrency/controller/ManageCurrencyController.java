@@ -1,7 +1,5 @@
 package com.ibm.managecurrency.controller;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,6 @@ public class ManageCurrencyController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<CurrencyDTO> getConversionFactorByID(@PathVariable(value="id") Long id) {
 		logger.info("Enters getConversionFactor methods ");
-		//manageCurrencyService.getCovertionFactor(countrycode);
 		CurrencyDTO currentDTO=manageCurrencyService.getCovertionFactorByID(id);
 		return  ResponseEntity.ok().body(currentDTO);
 	}
@@ -39,7 +36,6 @@ public class ManageCurrencyController {
 	@GetMapping("/countrycode/{countrycode}")
 	public ResponseEntity<Double> getConversionFactor(@PathVariable(value="countrycode") String countrycode) {
 		logger.info("Enters getConversionFactor methods ");
-		//manageCurrencyService.getCovertionFactor(countrycode);
 		return  ResponseEntity.ok().body(manageCurrencyService.getCovertionFactor(countrycode));
 	}
 	
@@ -47,8 +43,8 @@ public class ManageCurrencyController {
 	@GetMapping("/bycountrycode/{countrycode}")
 	public ResponseEntity<CurrencyDTO> getCurrency(@PathVariable(value="countrycode") String countrycode) {
 		logger.info("Enters getConversionFactor methods ");
-		//manageCurrencyService.getCovertionFactor(countrycode);
-		return  ResponseEntity.ok().body(manageCurrencyService.getCurrency(countrycode));
+		CurrencyDTO currentDTO=manageCurrencyService.getCurrency(countrycode);
+		return  ResponseEntity.ok().body(currentDTO);
 	}
 
 	@ApiOperation(" This will add convertion factor")

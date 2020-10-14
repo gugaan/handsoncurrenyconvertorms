@@ -1,0 +1,26 @@
+package com.ibm.convertcurrency.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping("convertcurrency")
+@RestController
+public class ConvertCurrencyController {
+	
+	@GetMapping("/countrycode/{countrycode}/amount/{amount}")
+	public Double convertCurrency(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount) {
+		Double totalamount=0.0;
+		if(countrycode.equals("INR")) {
+			totalamount=amount*75.5;
+		}else if(countrycode.equals("US")) {
+			totalamount=amount*50.0;
+		}else {
+			totalamount=amount*25.25;
+		}
+		return totalamount;
+		
+	}
+
+}
