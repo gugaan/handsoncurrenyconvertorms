@@ -1,9 +1,0 @@
-package com.ibm.managecurrency.entity;
-
-public class Currency {
-
-	public Currency() {
-	}
-    public String countryCode;
-    public Double convertionFactor;
-}

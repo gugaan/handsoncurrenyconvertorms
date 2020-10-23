@@ -18,8 +18,8 @@ import com.ibm.convertcurrency.service.ConvertCurrencyService;
 public class ConvertCurrencyController {
 	@Autowired
 	ConvertCurrencyService convertCurrencyService;
-	@GetMapping("/countrycode/{countrycode}/amount/{amount}")
-	public Double convertCurrency(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount) {
+	@GetMapping("/countrycodefromDB/{countrycode}/amount/{amount}")
+	public Double convertCurrencyFromDB(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount) {
 		return convertCurrencyService.convertCurrency(countrycode, amount);		
 		
 	}
@@ -28,4 +28,18 @@ public class ConvertCurrencyController {
 		return ResponseEntity.ok().body(convertCurrencyService.addConvertedCurrency(currencyDTO));
 		
 	}
+	@GetMapping("/countrycode/{countrycode}/amount/{amount}")
+	public Double convertCurrency(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount) {
+		Double totalamount=0.0;
+		if(countrycode.equals("INR")) {
+			totalamount=amount*75.5;
+		}else if(countrycode.equals("US")) {
+			totalamount=amount*50.0;
+		}else {
+			totalamount=amount*25.25;
+		}
+		return totalamount;
+		
+	}
+	
 }

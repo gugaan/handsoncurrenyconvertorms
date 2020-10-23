@@ -1,6 +1,0 @@
-server:
-  port: 8251
-  
-eureka:  client:    register-with-eureka: false
-    service-url: 
-     defaultZone: http://localhost:8251/eureka/      

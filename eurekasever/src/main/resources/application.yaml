@@ -1,6 +1,4 @@
 server:
-  port: 8089
+  port: 8190
   
 eureka:  client:    register-with-eureka: false
-    service-url: 
-     defaultZone:  http://localhost:8089/eureka      

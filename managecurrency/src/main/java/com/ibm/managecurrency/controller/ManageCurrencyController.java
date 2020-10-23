@@ -33,20 +33,26 @@ public class ManageCurrencyController {
 		return  ResponseEntity.ok().body(currentDTO);
 	}
 	@ApiOperation(" This will search convertion factor for given country code")
-	@GetMapping("/countrycode/{countrycode}")
+	@GetMapping("/getConversionFactor/{countrycode}")
 	public ResponseEntity<Double> getConversionFactor(@PathVariable(value="countrycode") String countrycode) {
 		logger.info("Enters getConversionFactor methods ");
 		return  ResponseEntity.ok().body(manageCurrencyService.getCovertionFactor(countrycode));
 	}
 	
 	@ApiOperation(" This will search convertion factor for given country code")
-	@GetMapping("/bycountrycode/{countrycode}")
+	@GetMapping("/getCurrency/{countrycode}")
 	public ResponseEntity<CurrencyDTO> getCurrency(@PathVariable(value="countrycode") String countrycode) {
 		logger.info("Enters getConversionFactor methods ");
 		CurrencyDTO currentDTO=manageCurrencyService.getCurrency(countrycode);
 		return  ResponseEntity.ok().body(currentDTO);
 	}
-
+	@ApiOperation(" This will search convertion factor for given country code")
+	@GetMapping("/getCurrencyFromConvertCurrencyDB/{countrycode}")
+	public ResponseEntity<CurrencyDTO> getCurrencyFromConvertCurrencyDB(@PathVariable(value="countrycode") String countrycode) {
+		logger.info("Enters getConversionFactor methods ");
+		CurrencyDTO currentDTO=manageCurrencyService.getCurrencyFromConvertCurrencyDB(countrycode);
+		return  ResponseEntity.ok().body(currentDTO);
+	}
 	@ApiOperation(" This will add convertion factor")
 	@PostMapping("/add")
 	public ResponseEntity<ResponseStatus> addConversionFactor(@RequestBody CurrencyDTO currencyDTO) {

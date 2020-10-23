@@ -1,0 +1,19 @@
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app: eurekaserverhandson
+    version: v1
+  name: eurekaserverhandson
+spec: 
+  ports: 
+    - 
+      name: http
+      port: 8190
+      targetPort: 8190
+
+  selector: 
+    app: eurekaserverhandson
+    version: v1
+  type: NodePort

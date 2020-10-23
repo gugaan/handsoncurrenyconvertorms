@@ -9,4 +9,6 @@ public interface ConvertCurrencyClient {
 
 	@GetMapping("/convertcurrency/countrycode/{countrycode}/amount/{amount}")
 	public Double convertCurrency(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount);
+	@GetMapping("/convertcurrency/countrycodefromDB/{countrycode}/amount/{amount}")
+	public Double convertCurrencyFromDB(@PathVariable("countrycode")String countrycode, @PathVariable("amount")Double amount);
 }

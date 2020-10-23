@@ -56,6 +56,18 @@ public class ManageCurrencyService {
 		return dto;
 	}
 	
+	@HystrixCommand(fallbackMethod = "convertCurrencyServiceFallback")
+	public CurrencyDTO getCurrencyFromConvertCurrencyDB(String countrycode) {
+
+		Currency currency = manageCurrencyRepository.findByCountrycode(countrycode);
+		CurrencyMapper currencymapper= new CurrencyMapper();
+		CurrencyDTO dto=currencymapper.convertToDto(currency);
+		Double convertedamount= convertCurrencyClient.convertCurrencyFromDB(countrycode, dto.getConvertionfactor());
+		dto.setConvertedamount(convertedamount);
+		return dto;
+
+	}
+	
 	public ResponseStatus createConversionFactor(CurrencyDTO dto) {
 		ResponseStatus responseStatus=new ResponseStatus();
 		CurrencyMapper currencymapper= new CurrencyMapper();

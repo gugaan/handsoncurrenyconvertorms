@@ -1,5 +1,0 @@
-package com.ibm.managecurrency.dto;
-
-public class ResponseDTO {
-
-}

@@ -1,0 +1,19 @@
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app: managecurrency
+    version: v1
+  name: managecurrency
+spec: 
+  ports: 
+    - 
+      name: http
+      port: 8250
+      targetPort: 8250
+
+  selector: 
+    app: managecurrency
+    version: v1
+  type: NodePort
