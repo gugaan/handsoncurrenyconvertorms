@@ -1,4 +1,7 @@
 server:
   port: 8190
   
-eureka:  client:    register-with-eureka: false
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
